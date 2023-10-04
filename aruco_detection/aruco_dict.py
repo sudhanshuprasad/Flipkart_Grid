@@ -1,6 +1,4 @@
-import numpy as np
 import cv2
-import os
 
 ARUCO_DICT = {
 	"DICT_4X4_50": cv2.aruco.DICT_4X4_50,
@@ -25,24 +23,3 @@ ARUCO_DICT = {
 	"DICT_APRILTAG_36h10": cv2.aruco.DICT_APRILTAG_36h10,
 	"DICT_APRILTAG_36h11": cv2.aruco.DICT_APRILTAG_36h11
 }
-
-aruco_type = "DICT_4X4_1000"
-id = 4
-
-arucoDict = cv2.aruco.getPredefinedDictionary(ARUCO_DICT[aruco_type])
-print("Aruco type {}, ID {}".format(aruco_type,id))
-
-tag_size =500
-tag = np.zeros((tag_size, tag_size, 1), dtype="uint8")
-cv2.aruco.generateImageMarker(arucoDict, id, tag_size, tag, 1)
-
-tag_name = "aruco_generation/arucoMarkers/" + aruco_type + "_" + str(id) + ".png"
-print(tag_name)
-# tag_name = os.path.join("G:/", "test.png")
-# print(tag_name)
-
-cv2.imwrite(tag_name, tag)
-cv2.imshow(tag_name, tag)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()

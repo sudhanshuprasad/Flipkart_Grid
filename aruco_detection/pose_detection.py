@@ -2,6 +2,7 @@ import numpy as np
 import time
 import cv2
 import aruco_dict
+from arm_movement import goto_box
 ARUCO_DICT = aruco_dict.ARUCO_DICT
 
 
@@ -11,6 +12,7 @@ def arm_translation(corners, ids, image):
 	box_id = 4
 	box = [0,0]
 	arm = [0,0]
+	offset = [20,10]
 
 	if len(corners) > 0:
 
@@ -42,14 +44,17 @@ def arm_translation(corners, ids, image):
 			else:
 				pass
 
+
+		# if arm and box are at the same position return or any one of them is not detected return [0,0]
 		if (box[0] == arm[0] and box[1] == arm[1]) or (box == [0,0] or arm == [0,0]):
 			return [0,0]
 		else:
-			x = box[0]-arm[0]
-			y = arm[1]-box[1]
+			x = box[0]-arm[0]+offset[0]
+			y = arm[1]-box[1]+offset[1]
 			print('x: ', x, 'y: ', y)
 			cv2.line(image, box, arm, (145, 105, 25), 2)
-
+			cv2.circle(image, (int(box[0]+offset[0]), int(box[1])+offset[1]), 4, (200, 20, 205), -1)
+		print(goto_box(x, y))
 		return [x,y]
 
 
@@ -79,7 +84,7 @@ def aruco_display(corners, ids, rejected, image):
 			
 			cv2.putText(image, str(markerID),(topLeft[0], topLeft[1] - 10), cv2.FONT_HERSHEY_SIMPLEX,
 				0.5, (0, 255, 0), 2)
-			print("[Inference] ArUco marker ID: {}".format(markerID))
+			# print("[Inference] ArUco marker ID: {}".format(markerID))
 			
 	return image
 

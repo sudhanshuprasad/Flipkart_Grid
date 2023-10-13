@@ -14,8 +14,8 @@ def goto_box(x, y):
     target = [box[0]-offset[0], box[1]-offset[1]]
 
     value = (write_read(str(target[0])+" "+str(target[1])))
-    print(value)
-    if target[0]<50 and target[1]<50 :
+    print("Response: " + value)
+    if target[0]<70 and target[1]<70 :
         return True
     else:
         return False

@@ -8,8 +8,8 @@ ARUCO_DICT = aruco_dict.ARUCO_DICT
 
 def arm_translation(corners, ids, image):
 	x=y=0
-	arm_id = 3
-	box_id = 4
+	arm_id = 1
+	box_id = 2
 	box = [0,0]
 	arm = [0,0]
 	offset = [20,10]
@@ -99,7 +99,7 @@ arucoParams = cv2.aruco.DetectorParameters()
 # print(arucoParams)
 
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 

@@ -2,14 +2,14 @@ import numpy as np
 import time
 import cv2
 import aruco_dict
-from arm_movement import goto_box
+# from arm_movement import goto_box
 ARUCO_DICT = aruco_dict.ARUCO_DICT
 
 
 def arm_translation(corners, ids, image):
 	x=y=0
 	arm_id = 1
-	box_id = 2
+	box_id = 4
 	box = [0,0]
 	arm = [0,0]
 	offset = [20,10]
@@ -26,7 +26,7 @@ def arm_translation(corners, ids, image):
 				
 				cX = int((topLeft[0] + bottomRight[0]) / 2.0)
 				cY = int((topLeft[1] + bottomRight[1]) / 2.0)
-				cv2.circle(image, (cX, cY), 10, (145, 105, 25), -1)
+				cv2.circle(image, (cX, cY), 3, (145, 105, 25), -1)
 				arm[0] = cX
 				arm[1] = cY
 				# print('arm: ', arm)
@@ -54,7 +54,7 @@ def arm_translation(corners, ids, image):
 			print('x: ', x, 'y: ', y)
 			cv2.line(image, box, arm, (145, 105, 25), 2)
 			cv2.circle(image, (int(box[0]+offset[0]), int(box[1])+offset[1]), 4, (200, 20, 205), -1)
-		print(goto_box(x, y))
+		# print(goto_box(x, y))
 		return [x,y]
 
 
